@@ -10,3 +10,16 @@ def define_posicoes(lin, col, orient, tam):
             col += 1
             saida.append([lin, col])
     return saida
+
+#Segunda função: Utiliza função anterior para armazenar posições dos navios em um dicionário 
+
+def preenche_frota(frota, nome, lin, col, orient, tam):
+    posicao = define_posicoes(lin, col, orient, tam)
+    if frota != {}:
+        if nome not in frota.keys():
+            frota[nome] = [posicao]
+        else:
+            frota[nome].append(posicao)
+    else:
+        frota[nome] = [posicao]
+    return frota
