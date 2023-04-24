@@ -23,3 +23,16 @@ def preenche_frota(frota, nome, lin, col, orient, tam):
     else:
         frota[nome] = [posicao]
     return frota
+
+# Terceira função: Recebe o tabuleiro atual, e a linha e a coluna do disparo do adverário, em seguida, indica com um X caso acerte um navio e com - se errar uma embarcação
+def faz_jogada(tabuleiro,linha,coluna):
+    if tabuleiro[linha][coluna] == 1:
+        tabuleiro[linha][coluna] = 'X'
+        return tabuleiro
+    
+    else:
+        tabuleiro[linha][coluna] = '-'
+        return tabuleiro
+
+resultado = faz_jogada
+print(resultado)
