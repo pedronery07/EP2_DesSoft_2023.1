@@ -1,5 +1,4 @@
-#Primeira função: Recebe linha, coluna, orientação e tamanho do navio a ser posicionado. Devolve posições ocupadas pelo navio no grid.
-
+# Primeira função: Recebe linha, coluna, orientação e tamanho do navio a ser posicionado. Retorna posições ocupadas pelo navio no grid.
 def define_posicoes(lin, col, orient, tam):
     saida = [[lin, col]]
     while len(saida) != tam:
@@ -11,8 +10,7 @@ def define_posicoes(lin, col, orient, tam):
             saida.append([lin, col])
     return saida
 
-#Segunda função: Utiliza função anterior para armazenar posições dos navios em um dicionário 
-
+# Segunda função: Utiliza função anterior para armazenar posições dos navios em um dicionário 
 def preenche_frota(frota, nome, lin, col, orient, tam):
     posicao = define_posicoes(lin, col, orient, tam)
     if frota != {}:
@@ -55,3 +53,20 @@ def posiciona_frota(frota):
                 grid[x][y] = 1
     return grid
 
+# Quinta função: Recebe frota e tabuleiro atual. Retorna o número de navios que já foram totalmente afundados. 
+def afundados(frota, tabuleiro):
+    afund = 0
+    for embarc, coord in frota.items():
+        for c in coord:
+            #Criação da variável que verifica se uma embarcação foi totalmente afundada
+            af = True
+            for coordenadas in c:
+                if af == True:
+                    ponto1 = coordenadas[0]
+                    ponto2 = coordenadas[1]
+                    if tabuleiro[ponto1][ponto2] != 'X':
+                        af = False
+            #Somente permite contagem se a variável for True
+            if af == True:
+                afund += 1
+    return afund
