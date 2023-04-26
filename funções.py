@@ -36,3 +36,22 @@ def faz_jogada(tabuleiro,linha,coluna):
 
 resultado = faz_jogada
 print(resultado)
+
+
+# Quarta função: Preenche os navios dentro do tabuleiro e retorna o tabuleiro com a posição dos navios.
+def posiciona_frota(frota):
+    grid = []
+    lista = []
+    for i in range(10):
+        for j in range(10):
+            lista.append(0)
+        grid.append(lista)
+        lista = []
+    for navio in frota.values():
+        for cord in navio:
+            for k in range(len(cord)):
+                x = cord[k][0]
+                y = cord[k][1]
+                grid[x][y] = 1
+    return grid
+
