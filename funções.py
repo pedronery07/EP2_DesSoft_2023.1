@@ -40,17 +40,20 @@ print(resultado)
 def posiciona_frota(frota):
     grid = []
     lista = []
+    
     for i in range(10):
         for j in range(10):
             lista.append(0)
         grid.append(lista)
         lista = []
+    
     for navio in frota.values():
         for cord in navio:
             for k in range(len(cord)):
                 x = cord[k][0]
                 y = cord[k][1]
                 grid[x][y] = 1
+    
     return grid
 
 # Quinta função: Recebe frota e tabuleiro atual. Retorna o número de navios que já foram totalmente afundados. 
@@ -70,3 +73,25 @@ def afundados(frota, tabuleiro):
             if af == True:
                 afund += 1
     return afund
+
+
+# Sexta função: Usa a segunda função para definir se a nova posição é válida ou não
+def posicao_valida(frota,lin,col,orient,tam):
+    f = 0
+    p = define_posicoes(lin,col,orient,tam)
+    for i in p:
+        if i[0] > 9 or i[1] > 9:
+            f += 1
+            break
+        for j in frota.keys():
+            for c in range(len(frota[j])):
+                if i in frota[j][c]:
+                    f += 1
+                    break
+                else:
+                    continue
+            c = 0
+    if f > 0:
+        return False
+    else:
+        return True
