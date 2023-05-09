@@ -1,4 +1,5 @@
 from funções import posicao_valida, preenche_frota, posiciona_frota, afundados, faz_jogada, monta_tabuleiros
+from random import randint
 
 resultado = faz_jogada
 print(resultado)
@@ -61,13 +62,14 @@ tabuleiro_jogador = posiciona_frota(frota_jogador)
 montagem_de_tabuleiros = monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente)
 print(montagem_de_tabuleiros)
 
-#AINDA É NECESSÁRIO IMPRIMIR OS TABULEIROS DO JOGADOR E DO OPONENTE
-# FEITO
 jogando = True
 posicoes_passadas = []
+ataques_oponente = []
 while jogando:
     validos = [0,1,2,3,4,5,6,7,8,9]
     posicao = []
+
+    #ATAQUE DO JOGADOR
     linha_ataque = int(input('Linha que deseja atacar: '))
     while linha_ataque not in validos:
         print('Linha inválida')
@@ -83,12 +85,31 @@ while jogando:
     else:
         posicoes_passadas.append(posicao)
         tabuleiro_oponente = faz_jogada(tabuleiro_oponente,linha_ataque,coluna_ataque)
-        montagem_de_tabuleiros = monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente)
-        print(montagem_de_tabuleiros)
-        #AQUI DEVE AINDA OCORRER A VERIFICAÇÃO SE TODAS AS EMBARCAÇÕES DO OPONENTE FORAM AFUNDADAS PARA QUEBRAR OU NÃO O LOOP PRINCIPAL DO JOGO (jogando = False)
+        
+        #VERIFICA VITÓRIA DO JOGADOR
         a = afundados(frota_oponente, tabuleiro_oponente)
         if a == 10:
             print('Parabéns! Você derrubou todos os navios do seu oponente!')
             jogando = False
         else:
-            continue
+            #ATAQUE DO OPONENTE
+            linha_oponente = randint(0,9)
+            coluna_oponente = randint(0,9)
+            ataque = [linha_oponente, coluna_oponente]
+            while ataque in ataques_oponente:
+                linha_oponente = randint(0,9)
+                coluna_oponente = randint(0,9)
+                ataque = [linha_oponente, coluna_oponente]
+            print(f'Seu oponente está atacando na linha {linha_oponente} e coluna {coluna_oponente}')
+            ataques_oponente.append(ataque)
+            tabuleiro_jogador = faz_jogada(tabuleiro_jogador, linha_oponente, coluna_oponente)
+
+            #VERIFICA VITÓRIA DO OPONENTE
+            a2 = afundados(frota_jogador, tabuleiro_jogador)
+            if a2 == 10:
+                print('Xi! O oponente derrubou toda a sua frota =(')
+                jogando = False
+        
+            #ATUALIZA TABULEIRO APÓS RODADA DE ATAQUES
+            montagem_de_tabuleiros = monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente)
+            print(montagem_de_tabuleiros)
