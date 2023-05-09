@@ -1,9 +1,6 @@
 from funções import posicao_valida, preenche_frota, posiciona_frota, afundados, faz_jogada, monta_tabuleiros
 from random import randint
 
-resultado = faz_jogada
-print(resultado)
-
 frota_oponente = {
     'porta-aviões': [
         [[9, 1], [9, 2], [9, 3], [9, 4]]

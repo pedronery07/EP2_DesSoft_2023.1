@@ -32,10 +32,6 @@ def faz_jogada(tabuleiro,linha,coluna):
         tabuleiro[linha][coluna] = '-'
         return tabuleiro
 
-resultado = faz_jogada
-print(resultado)
-
-
 # Quarta função: Preenche os navios dentro do tabuleiro e retorna o tabuleiro com a posição dos navios.
 def posiciona_frota(frota):
     grid = []
